@@ -1,0 +1,30 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Lint & Test API
+        run: |
+          cd api
+          npm install
+          npm run lint
+          npm test
+
+      - name: Build API Image
+        run: docker build -t api:${{ github.sha }} api
+
+      - name: Build Worker Image
+        run: docker build -t worker:${{ github.sha }} worker
+
+      - name: Security Scan (optional)
+        run: echo "Security scan placeholder"
+
+      - name: Deploy (mock)
+        run: echo "Deploying to Kubernetes"
