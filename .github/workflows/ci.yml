@@ -15,7 +15,7 @@ jobs:
       - name: Install & Test API
         run: |
           cd api
-          npm Install
+          npm install
           npm run lint
           npm test
 
