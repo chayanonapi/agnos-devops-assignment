@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    name: 'Test Build-API and Images
+    name: 'Test Build-API and Images'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
