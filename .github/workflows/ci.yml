@@ -5,17 +5,27 @@ on:
     branches: [ main ]
 
 jobs:
-  build-Test:
+  test:
+    name: Lint & Test
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
 
-      - name: Lint & Test API
+      - name: Install & Test API
         run: |
           cd api
-          npm install
+          npm ci
           npm run lint
           npm test
+
+  build:
+    name: Build Docker Images
+    runs-on: ubuntu-latest
+    needs: test   # ⬅️ stage dependency
+
+    steps:
+      - uses: actions/checkout@v4
 
       - name: Build API Image
         run: docker build -t api:${{ github.sha }} api
@@ -23,6 +33,12 @@ jobs:
       - name: Build Worker Image
         run: docker build -t worker:${{ github.sha }} worker
 
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    needs: build  # ⬅️ stage dependency
+
+    steps:
       - name: Security Scan (optional)
         run: echo "Security scan placeholder"
 
