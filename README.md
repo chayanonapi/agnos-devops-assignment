@@ -2,7 +2,7 @@
 
 ## Overview
 This repository demonstrates a production-style DevOps implementation for a simple system composed of an **API service** and a **background worker**.  
-The objective is to showcase **containerization, Kubernetes orchestration, CI/CD automation, scalability, and reliability**, rather than application business logic.
+The objective is to showcase **containerization, Kubernetes orchestration, CI/CD automation, scalability, and reliability**.
 
 ---
 
@@ -25,8 +25,6 @@ The objective is to showcase **containerization, Kubernetes orchestration, CI/CD
 
 This guide explains how to set up, build, and deploy the project locally using **Docker** and **Kubernetes**.
 
----
-
 ### Prerequisites
 
 Make sure the following tools are installed on your machine:
@@ -47,8 +45,6 @@ git --version
 ## Usage Instructions
 
 This section explains how to use the application once it has been deployed to Kubernetes.
-
----
 
 ### 1. Check Application Status
 
@@ -75,3 +71,25 @@ Use curl or a browser to verify the API is healthy:
 ```bash
 curl http://localhost:8080/health
 ```
+
+## Failure Scenario
+- **API crashes during peak hours**
+  - Check pod status and logs.
+  - Scale API replicas if needed.
+  - Increase resource limits or optimize code.
+
+- **Worker fails and infinitely retries**
+  - Inspect worker logs.
+  - Scale worker to zero to stop retries.
+  - Fix retry logic (add retry limits or backoff).
+  - Restart worker after fix.
+
+- **Bad deployment is released**
+  - Pause rollout if needed.
+  - Roll back to previous stable version.
+  - Fix issue and redeploy.
+
+- **Kubernetes node goes down**
+  - Verify node and pod status.
+  - Scale deployments if capacity is reduced.
+  - Replace or recover failed node at infrastructure level.
