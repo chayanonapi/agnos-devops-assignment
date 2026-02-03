@@ -33,7 +33,7 @@ Make sure the following tools are installed on your machine:
 - kubectl
 - Git
 
-Verify installation:
+**Verify installation:**
 
 ```bash
 docker version
@@ -71,6 +71,8 @@ Use curl or a browser to verify the API is healthy:
 ```bash
 curl http://localhost:8080/health
 ```
+
+---
 
 ## Failure Scenario
 - **API crashes during peak hours**

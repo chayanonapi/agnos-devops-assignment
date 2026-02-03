@@ -1,9 +1,9 @@
 {
   "name": "worker",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/worker.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node src/worker.js"
   },
   "dependencies": {
     "pino": "^8.17.0"
